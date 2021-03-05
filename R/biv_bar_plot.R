@@ -79,7 +79,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
 
       for(i in cols) {
 
-        png(paste0(loc, "/denseplot_", i, ".PNG"), width = 627, height = 453)
+        png(paste0(loc, "/barplot_", i, ".PNG"), width = 627, height = 453)
         plot <- dataset %>%
           dplyr::select(x, all_of(i)) %>%
           table() %>%
