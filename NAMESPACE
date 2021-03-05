@@ -2,7 +2,6 @@
 
 export("%>%")
 export(biv_bar_plot)
-export(hello)
 import(dplyr)
 import(ggplot2)
 importFrom(data.table,":=")

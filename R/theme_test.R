@@ -1,11 +1,11 @@
-#' Test Function
+#' Transparent Theme
 #'
 #' @return
-#' A customized theme to be used in ggplot
-#'
-theme_test <- function(){
-  font <- "Arial"   #assign font family up front
-  color <-  "#0a0a0a" #assign black
+#' A customised theme to be used in ggplots
+
+theme_dark <- function(){
+  font <- "sans"   #assign font family up front
+  color <-  "#dbdbdb" #assign black
 
   ggplot2::theme_minimal() %+replace%    #replace elements we want to change
 
