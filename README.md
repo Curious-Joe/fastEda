@@ -6,14 +6,16 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/Curious-Joe/fastEda/workflows/R-CMD-check/badge.svg)](https://github.com/Curious-Joe/fastEda/actions)
+
 <!-- badges: end -->
 
 `fastEda` is intended to make repeated plotting tasks easier and faster.
 Using the available functions users will be able to quickly create
 multiple plots on similar data to perform common tasks such as:
 
-    * Plot inidivdual feature/variable,
-    * Visualize plots to explore bivariate relation between target feature and input features.
+  - Plot individual feature/variable,
+  - Visualize plots to explore bi-variate relations between target
+    feature and input features.
 
 ## Installation
 
@@ -22,7 +24,7 @@ with:
 
 ``` r
 # install.packages("devtools")
-install.packages("fastEda")
+devtools::install_github("Curious-Joe/fastEda")
 ```
 
 ## Example
@@ -35,14 +37,6 @@ install.packages("fastEda")
 ``` r
 library(fastEda)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 biv_bar_plot(dataset = iris %>%
                mutate(Sepal_Width_Categorie = ifelse(Sepal.Width < 
                                               mean(iris$Sepal.Width), 'Low', 'High')),

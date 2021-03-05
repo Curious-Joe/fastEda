@@ -16,14 +16,15 @@ knitr::opts_chunk$set(
 # fastEda
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/Curious-Joe/fastEda/workflows/R-CMD-check/badge.svg)](https://github.com/Curious-Joe/fastEda/actions)
+
 <!-- badges: end -->
 
-`fastEda` is intended to make repeated plotting tasks easier and faster. 
-    Using the available functions users will be able to quickly create multiple plots on similar data to perform common tasks such as:
-    
-    * Plot inidivdual feature/variable,
-    * Visualize plots to explore bivariate relation between target feature and input features.
+`fastEda` is intended to make repeated plotting tasks easier and faster. Using the available functions users will be able to quickly create multiple plots on similar data to perform common tasks such as:
+
+*  Plot individual feature/variable,
+*  Visualize plots to explore bi-variate relations between target feature and input features.
 
 ## Installation
 
@@ -31,14 +32,14 @@ knitr::opts_chunk$set(
 
 ``` r
 # install.packages("devtools")
-install.packages("fastEda")
+devtools::install_github("Curious-Joe/fastEda")
 ```
 
 ## Example
 
-* Plot barplots showing ratio of the target labels/categories in all the available categorical features in the dataset:
+-   Plot barplots showing ratio of the target labels/categories in all the available categorical features in the dataset:
 
-```{r example, out.height='60%', out.width='60%'}
+```{r example, out.height='60%', out.width='60%', message=FALSE, warning=FALSE}
 library(fastEda)
 library(dplyr)
 biv_bar_plot(dataset = iris %>%
@@ -50,4 +51,3 @@ biv_bar_plot(dataset = iris %>%
 
 
 ```
-
