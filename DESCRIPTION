@@ -1,0 +1,14 @@
+Package: fastEda
+Type: Package
+Title: A collection of functions that can be used to do some quick visual data explorations.
+Version: 0.1.0
+Author: Arafath Hossain <a.h.fahad90@gmail.com>
+Maintainer: Arafath Hossain <a.h.fahad90@gmail.com>
+Description: `fastEda` is intended to make repeated plotting tasks easier and faster. 
+    Using the available functions users will be able to quickly create multiple plots on similar data to perform common tasks such as:
+    * Plot inidivdual feature/variable,
+    * Visualize plots to explore bivariate relation between target feature and input features.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
