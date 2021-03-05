@@ -81,7 +81,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
 
         png(paste0(loc, "/denseplot_", i, ".PNG"), width = 627, height = 453)
         plot <- dataset %>%
-          dplyr::select(x, i) %>%
+          dplyr::select(x, all_of(i)) %>%
           table() %>%
           data.frame() %>%
           ggplot2::ggplot(ggplot2::aes_string(x=i, y="Freq", fill=x)) +
