@@ -1,6 +1,6 @@
 Package: fastEda
 Type: Package
-Title: A collection of functions that can be used to do some quick visual data explorations.
+Title: A Collection of Functions to Run Fast Exploratory Data Analysis
 Version: 0.1.0
 Author: Arafath Hossain <a.h.fahad90@gmail.com>
 Maintainer: Arafath Hossain <a.h.fahad90@gmail.com>
@@ -14,3 +14,17 @@ LazyData: true
 RoxygenNote: 7.1.1
 URL: https://github.com/Curious-Joe/fastEda
 BugReports: https://github.com/Curious-Joe/fastEda/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    dplyr,
+    rlang,
+    forcats,
+    randomcoloR,
+    ggplot2,
+    grDevices,
+    data.table,
+    tidyselect,
+    magrittr

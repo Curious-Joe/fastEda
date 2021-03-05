@@ -11,9 +11,6 @@ hello(x)
 }
 \value{
 The output from \code{\link{print}}
-\dontrun{
-hello("Steve")
-}
 }
 \description{
 Test Function

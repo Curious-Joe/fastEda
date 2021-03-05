@@ -8,6 +8,7 @@
 #' @param classVar Name of the target feature
 #' @param order A vector listing the target feature labels in the desired order. To use default order leave this parameter. Default value NULL.
 #' @param colors A vector listing which color to use to represent which target feature label. To have the function pick color leave this parameter. Default value NULL.
+#' @param barType A string value indicating bar plot type i.e. stack, dodge, fill.
 #' @param loc A string with the directory where you want to save the plots. If no location is provided the plots will be created and displayed but not stored as image files.
 #'
 #' @return
@@ -16,22 +17,25 @@
 #' 1. If loc = NULL, returns plots and displays in the RStudio Plots window,
 #' 2. If loc has location provided, creates and saves the plots. Doesn't display in RStudio.
 #'
+#' @importFrom rlang enquo get_expr
+#' @import dplyr ggplot2
+#' @importFrom forcats fct_relevel
+#' @importFrom randomcoloR randomColor
+#' @importFrom grDevices dev.off png
+#' @importFrom data.table :=
 #'
 #'
 #' @examples
-#'
 #' library(dplyr)
-#' barPlot(dataset = iris %>%
+#' biv_bar_plot(dataset = iris %>%
 #' mutate(sepal_width_cat = ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High')),
-#' classVar = Species,
-#'            order = c("virginica", "versicolor", "setosa"),
-#'                       colors = c("virginica" = "#32a897", "versicolor" = "#328bab", "setosa" = "#8031ad"))
-#'
+#' classVar = Species)
 #'
 #' @export
 #'
 
-barPlot <- function(dataset, classVar, order = NULL, colors = NULL, barType = "dodge", loc = NULL) {
+biv_bar_plot <- function(dataset, classVar, order = NULL,
+                    colors = NULL, barType = "dodge", loc = NULL) {
 
   x <- rlang::enquo(classVar) %>% rlang::get_expr()
   nLevels <- dplyr::select(dataset, {{classVar}}) %>% unique() %>% nrow()
@@ -48,7 +52,8 @@ barPlot <- function(dataset, classVar, order = NULL, colors = NULL, barType = "d
   }
 
   # fetching categorical feature names
-  cols <- names(dplyr::select(dataset %>% dplyr::select(-all_of(x)), !where(is.numeric)))
+  cols <- names(dplyr::select(dataset %>%
+                                dplyr::select(-all_of(x)), !where(is.numeric)))
 
   {
     # fetching bar plot type
@@ -65,7 +70,7 @@ barPlot <- function(dataset, classVar, order = NULL, colors = NULL, barType = "d
                 data.frame() %>%
                 ggplot2::ggplot(aes_string(x=i, y="Freq", fill=x)) +
                 ggplot2::geom_bar(position=barType, stat="identity") +
-                ggplot2::scale_fill_brewer(palette="Paired") +
+                ggplot2::scale_color_manual(values = colors) +
                 ggplot2::labs(title = paste0(i, " in Different Categories of ", x)) +
                 ggplot2::theme_minimal()
         )
@@ -81,7 +86,7 @@ barPlot <- function(dataset, classVar, order = NULL, colors = NULL, barType = "d
           data.frame() %>%
           ggplot2::ggplot(ggplot2::aes_string(x=i, y="Freq", fill=x)) +
           ggplot2::geom_bar(position=barType, stat="identity") +
-          ggplot2::scale_fill_brewer(palette="Paired") +
+          ggplot2::scale_color_manual(values = colors) +
           ggplot2::labs(title = paste0(i, " in Different Categories of ", x)) +
           ggplot2::theme_minimal()
         print(plot)
