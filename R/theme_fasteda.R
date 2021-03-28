@@ -1,11 +1,17 @@
-#' Test Function
+#' A color customizable theme
+#'
+#' @description This is a customizable ggplot theme. Where a user can change the default background color
+#' of ggplot with the color of their choice by providing the hexa-code of the color inside the function.
+#'
+#'@param color A hexacode starting with `#`.
 #'
 #' @return
-#' A customized theme to be used in ggplot
+#' A customised theme to be used in ggplots
 #'
-theme_test <- function(){
-  font <- "Arial"   #assign font family up front
-  color <-  "#0a0a0a" #assign black
+#' @export
+
+theme_fasteda <- function(color = "#2F4F4F"){
+  font <- "sans"   #assign font family up front
 
   ggplot2::theme_minimal() %+replace%    #replace elements we want to change
 

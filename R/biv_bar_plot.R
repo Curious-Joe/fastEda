@@ -1,3 +1,16 @@
+# CUSTOMISED GGPLOT ----
+
+#' A util function to plot a customized ggplot
+#' @noRd
+plot <- function(data, x, y, fill, position, colors){
+  data %>%
+    ggplot2::ggplot(aes_string(x=x, y=y, fill=fill)) +
+    ggplot2::geom_bar(position=position, stat="identity") +
+    ggplot2::scale_fill_manual(values = colors) +
+    ggplot2::labs(title = paste0(x, " in Different Categories of ", fill)) +
+    theme_fasteda()
+}
+
 # BAR PLOTS FOR CATEGORICAL FEATURES SPLIT IN TARGET FEAT CATEGORIS ----
 
 #' A function to display or save density plots created on all categorical features.
@@ -68,11 +81,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
                 dplyr::select(x, all_of(i)) %>%
                 table() %>%
                 data.frame() %>%
-                ggplot2::ggplot(aes_string(x=i, y="Freq", fill=x)) +
-                ggplot2::geom_bar(position=barType, stat="identity") +
-                ggplot2::scale_fill_manual(values = colors) +
-                ggplot2::labs(title = paste0(i, " in Different Categories of ", x)) +
-                ggplot2::theme_minimal()
+                fastEda:::plot(x = i, y = "Freq", fill = x, position = barType, colors)
         )
       }
     } else{
@@ -84,11 +93,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
           dplyr::select(x, all_of(i)) %>%
           table() %>%
           data.frame() %>%
-          ggplot2::ggplot(ggplot2::aes_string(x=i, y="Freq", fill=x)) +
-          ggplot2::geom_bar(position=barType, stat="identity") +
-          ggplot2::scale_fill_manual(values = colors) +
-          ggplot2::labs(title = paste0(i, " in Different Categories of ", x)) +
-          ggplot2::theme_minimal()
+          fastEda:::plot(x = i, y = "Freq", fill = x, position = barType, colors)
         print(plot)
         dev.off()
       }
