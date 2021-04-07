@@ -2,7 +2,7 @@
 
 #' A util function to plot a customized ggplot
 #' @noRd
-plot <- function(data, x, y, fill, position, colors){
+barPlot <- function(data, x, y, fill, position, colors){
   data %>%
     ggplot2::ggplot(aes_string(x=x, y=y, fill=fill)) +
     ggplot2::geom_bar(position=position, stat="identity") +
@@ -40,6 +40,7 @@ plot <- function(data, x, y, fill, position, colors){
 #'
 #' @examples
 #' library(dplyr)
+#' library(ggplot2)
 #' biv_bar_plot(dataset = iris %>%
 #' mutate(sepal_width_cat = ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High')),
 #' classVar = Species)
@@ -81,7 +82,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
                 dplyr::select(x, all_of(i)) %>%
                 table() %>%
                 data.frame() %>%
-                fastEda:::plot(x = i, y = "Freq", fill = x, position = barType, colors)
+                barPlot(x = i, y = "Freq", fill = x, position = barType, colors)
         )
       }
     } else{
@@ -93,7 +94,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
           dplyr::select(x, all_of(i)) %>%
           table() %>%
           data.frame() %>%
-          fastEda:::plot(x = i, y = "Freq", fill = x, position = barType, colors)
+          barPlot(x = i, y = "Freq", fill = x, position = barType, colors)
         print(plot)
         dev.off()
       }
