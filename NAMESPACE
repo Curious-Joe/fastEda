@@ -3,6 +3,7 @@
 export("%>%")
 export(biv_bar_plot)
 export(biv_box_plot)
+export(biv_dense_plot)
 export(theme_fasteda)
 import(dplyr)
 import(ggplot2)
