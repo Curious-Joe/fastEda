@@ -80,10 +80,10 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
     if(is.null(loc)){
       for(i in cols) {
         print(dataset %>%
-                dplyr::select(x, all_of(i)) %>%
+                dplyr::select(x, facet, all_of(i)) %>%
                 table() %>%
                 data.frame() %>%
-                barPlot(x = i, y = "Freq", fill = x, position = barType, colors) +
+                barPlot(x = i, y = "Freq", fill = x, position = barType, colors = colors) +
                 wrap_by({{facet}})
         )
       }
@@ -93,10 +93,10 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
 
         png(paste0(loc, "/barplot_", i, ".PNG"), width = 627, height = 453)
         plot <- dataset %>%
-          dplyr::select(x, all_of(i)) %>%
+          dplyr::select(x, facet, all_of(i)) %>%
           table() %>%
           data.frame() %>%
-          barPlot(x = i, y = "Freq", fill = x, position = barType, colors) +
+          barPlot(x = i, y = "Freq", fill = x, position = barType, colors = colors) +
           wrap_by({{facet}})
         print(plot)
         dev.off()
