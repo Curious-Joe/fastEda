@@ -37,7 +37,7 @@ Creates (or saves as png if asked) violin plots for all numeric features. Split 
 \examples{
 library(dplyr)
 library(ggplot2)
-biv_box_plot(dataset = iris,
+biv_violin_plot(dataset = iris,
     classVar = Species,
              order = c("virginica", "versicolor", "setosa"),
                         colors = c("virginica" = "#32a897", "versicolor" = "#328bab", "setosa" = "#8031ad"))

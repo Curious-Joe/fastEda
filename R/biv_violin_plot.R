@@ -4,10 +4,11 @@
 #' @noRd
 violinPlot <- function(data, x, y, order = NULL, colors = NULL){
   data %>%
-    ggplot2::ggplot(ggplot2::aes_string(x, y, color = x)) +
+    ggplot2::ggplot(ggplot2::aes_string(x, y, fill = x)) +
     ggplot2::geom_violin(show.legend = FALSE) +
+    ggplot2::geom_boxplot(width = 0.1, color = 'white') +
     ggplot2::scale_x_discrete(limits = order) +
-    ggplot2::scale_color_manual(values = colors) +
+    ggplot2::scale_fill_manual(values = colors) +
     ggplot2::labs(title = paste0("Distribution of ", y, " in Different ", x, " Categories")) +
     ggplot2::theme_minimal()
 }
@@ -35,7 +36,7 @@ violinPlot <- function(data, x, y, order = NULL, colors = NULL){
 #' @examples
 #' library(dplyr)
 #' library(ggplot2)
-#' biv_box_plot(dataset = iris,
+#' biv_violin_plot(dataset = iris,
 #'     classVar = Species,
 #'              order = c("virginica", "versicolor", "setosa"),
 #'                         colors = c("virginica" = "#32a897", "versicolor" = "#328bab", "setosa" = "#8031ad"))
