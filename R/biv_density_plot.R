@@ -42,7 +42,7 @@ densePlot <- function(data, numVar, catVar, colors = NULL){
 #'
 #' @export
 
-biv_dense_plot <- function(dataset, classVar, order = NULL, colors = NULL, loc = NULL) {
+biv_dense_plot <- function(dataset, classVar, order = NULL, colors = NULL, facet = NULL, loc = NULL) {
 
   x <- rlang::enquo(classVar) %>% rlang::get_expr()
   nLevels <- dplyr::select(dataset, {{classVar}}) %>% unique() %>% nrow()
@@ -56,7 +56,8 @@ biv_dense_plot <- function(dataset, classVar, order = NULL, colors = NULL, loc =
   if(is.null(loc)){
     for(i in names(dplyr::select(dataset, where(is.numeric)))) {
       print(dataset %>%
-              densePlot(i, catVar = x, colors = colors)
+              densePlot(i, catVar = x, colors = colors) +
+              wrap_by({{facet}})
               )
     }
   } else{
@@ -65,7 +66,8 @@ biv_dense_plot <- function(dataset, classVar, order = NULL, colors = NULL, loc =
 
       png(paste0(loc, "/denseplot_", i, ".PNG"), width = 627, height = 453)
       plot <- dataset %>%
-        densePlot(i, catVar = x, colors = colors)
+        densePlot(i, catVar = x, colors = colors) +
+        wrap_by({{facet}})
       print(plot)
       dev.off()
     }

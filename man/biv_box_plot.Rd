@@ -4,7 +4,14 @@
 \alias{biv_box_plot}
 \title{A function to display or save box plots created on all numeric features.}
 \usage{
-biv_box_plot(dataset, classVar, order = NULL, colors = NULL, loc = NULL)
+biv_box_plot(
+  dataset,
+  classVar,
+  order = NULL,
+  colors = NULL,
+  facet = NULL,
+  loc = NULL
+)
 }
 \arguments{
 \item{dataset}{Name of the data frame object}

@@ -4,7 +4,14 @@
 \alias{biv_dense_plot}
 \title{A function to display or save density plots created on all numeric features.}
 \usage{
-biv_dense_plot(dataset, classVar, order = NULL, colors = NULL, loc = NULL)
+biv_dense_plot(
+  dataset,
+  classVar,
+  order = NULL,
+  colors = NULL,
+  facet = NULL,
+  loc = NULL
+)
 }
 \arguments{
 \item{dataset}{Name of the data frame object}

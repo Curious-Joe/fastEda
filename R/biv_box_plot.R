@@ -42,7 +42,7 @@ boxPlot <- function(data, x, y, order = NULL, colors = NULL){
 #'
 #' @export
 
-biv_box_plot <- function(dataset, classVar, order = NULL, colors = NULL, loc = NULL) {
+biv_box_plot <- function(dataset, classVar, order = NULL, colors = NULL, facet = NULL, loc = NULL) {
 
   x <- rlang::enquo(classVar) %>% rlang::get_expr()
   nLevels <- dplyr::select(dataset, {{classVar}}) %>% unique() %>% nrow()
@@ -54,14 +54,16 @@ biv_box_plot <- function(dataset, classVar, order = NULL, colors = NULL, loc = N
   if(is.null(loc)){
     for(i in names(dplyr::select(dataset, where(is.numeric)))) {
       print(dataset %>%
-              boxPlot(x = x, y = i, order = order, colors = colors)
+              boxPlot(x = x, y = i, order = order, colors = colors) +
+              wrap_by({{facet}})
             )
     }
   } else{
     for(i in names(dplyr::select(dataset, where(is.numeric)))) {
       png(paste0(loc, "/boxplot_", i, ".PNG"), width = 627, height = 453)
       plot <- dataset %>%
-        boxPlot(x = x, y = i, order = order, colors = colors)
+        boxPlot(x = x, y = i, order = order, colors = colors) +
+        wrap_by({{facet}})
       print(plot)
       dev.off()
     }

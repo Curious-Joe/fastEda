@@ -8,7 +8,7 @@ barPlot <- function(data, x, y, fill, position, colors){
     ggplot2::geom_bar(position=position, stat="identity") +
     ggplot2::scale_fill_manual(values = colors) +
     ggplot2::labs(title = paste0(x, " in Different Categories of ", fill)) +
-    theme_fasteda()
+    ggplot2::theme_minimal()
 }
 
 # BAR PLOTS FOR CATEGORICAL FEATURES SPLIT IN TARGET FEAT CATEGORIS ----
@@ -49,7 +49,7 @@ barPlot <- function(data, x, y, fill, position, colors){
 #'
 
 biv_bar_plot <- function(dataset, classVar, order = NULL,
-                    colors = NULL, barType = "dodge", loc = NULL) {
+                    colors = NULL, barType = "dodge", facet = NULL, loc = NULL) {
 
   x <- rlang::enquo(classVar) %>% rlang::get_expr()
   nLevels <- dplyr::select(dataset, {{classVar}}) %>% unique() %>% nrow()
@@ -82,7 +82,8 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
                 dplyr::select(x, all_of(i)) %>%
                 table() %>%
                 data.frame() %>%
-                barPlot(x = i, y = "Freq", fill = x, position = barType, colors)
+                barPlot(x = i, y = "Freq", fill = x, position = barType, colors) +
+                wrap_by({{facet}})
         )
       }
     } else{
@@ -94,7 +95,8 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
           dplyr::select(x, all_of(i)) %>%
           table() %>%
           data.frame() %>%
-          barPlot(x = i, y = "Freq", fill = x, position = barType, colors)
+          barPlot(x = i, y = "Freq", fill = x, position = barType, colors) +
+          wrap_by({{facet}})
         print(plot)
         dev.off()
       }

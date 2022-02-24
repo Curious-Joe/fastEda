@@ -10,6 +10,7 @@ biv_bar_plot(
   order = NULL,
   colors = NULL,
   barType = "dodge",
+  facet = NULL,
   loc = NULL
 )
 }
