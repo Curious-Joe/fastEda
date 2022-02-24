@@ -43,9 +43,10 @@ barPlot <- function(data, x, y, fill, position, colors){
 #' library(dplyr)
 #' library(ggplot2)
 #' biv_bar_plot(dataset = iris %>%
-#' mutate(sepal_width_cat = ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High')),
-#' classVar = Species)
-#'
+#' mutate(
+#' sepal_width_cat = ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High'),
+#' sepal_length_cat = ifelse(Sepal.Length < mean(iris$Sepal.Length), 'Low', 'High')),
+#' classVar = Species, barType = 'fill', facet = )#'
 #' @export
 #'
 
@@ -80,7 +81,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
     if(is.null(loc)){
       for(i in cols) {
         print(dataset %>%
-                dplyr::select(x, facet, all_of(i)) %>%
+                dplyr::select(x, {{facet}}, all_of(i)) %>%
                 table() %>%
                 data.frame() %>%
                 barPlot(x = i, y = "Freq", fill = x, position = barType, colors = colors) +
@@ -93,7 +94,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
 
         png(paste0(loc, "/barplot_", i, ".PNG"), width = 627, height = 453)
         plot <- dataset %>%
-          dplyr::select(x, facet, all_of(i)) %>%
+          dplyr::select(x, {{facet}}, all_of(i)) %>%
           table() %>%
           data.frame() %>%
           barPlot(x = i, y = "Freq", fill = x, position = barType, colors = colors) +
