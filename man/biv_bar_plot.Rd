@@ -42,8 +42,8 @@ library(dplyr)
 library(ggplot2)
 biv_bar_plot(dataset = iris \%>\%
 mutate(
-sepal_width_cat = factor(ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High')),
-sepal_length_cat = factor(ifelse(Sepal.Length < mean(iris$Sepal.Length), 'Low', 'High'))),
+sepal_width_cat = ifelse(Sepal.Width < mean(iris$Sepal.Width), 'Low', 'High'),
+sepal_length_cat = ifelse(Sepal.Length < mean(iris$Sepal.Length), 'Low', 'High')),
 classVar = Species, barType = 'fill', facet = sepal_width_cat)
 
 }
