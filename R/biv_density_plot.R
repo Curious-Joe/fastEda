@@ -22,6 +22,7 @@ densePlot <- function(data, numVar, catVar, colors = NULL){
 #' @param order A vector listing the target feature labels in the desired order. To use default order leave this parameter. Default value NULL.
 #' @param colors A vector listing which color to use to represent which target feature label. To have the function pick color leave this parameter. Deafult value NULL.
 #' @param loc A string with the directory where you want to save the plots. If no location is provided the plots will be created and displayed but not stored as image files.
+#' @param facet Name of the features along which to separate the plots as facets
 #'
 #' @return
 #'

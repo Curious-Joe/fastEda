@@ -25,6 +25,8 @@ biv_bar_plot(
 
 \item{barType}{A string value indicating bar plot type i.e. stack, dodge, fill.}
 
+\item{facet}{Name of the features along which to separate the plots as facets}
+
 \item{loc}{A string with the directory where you want to save the plots. If no location is provided the plots will be created and displayed but not stored as image files.}
 }
 \value{

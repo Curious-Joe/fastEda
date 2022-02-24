@@ -22,6 +22,8 @@ biv_dense_plot(
 
 \item{colors}{A vector listing which color to use to represent which target feature label. To have the function pick color leave this parameter. Deafult value NULL.}
 
+\item{facet}{Name of the features along which to separate the plots as facets}
+
 \item{loc}{A string with the directory where you want to save the plots. If no location is provided the plots will be created and displayed but not stored as image files.}
 }
 \value{

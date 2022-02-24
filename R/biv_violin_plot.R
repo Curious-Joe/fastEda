@@ -2,10 +2,10 @@
 
 #' A util function to plot a customized ggplot
 #' @noRd
-boxPlot <- function(data, x, y, order = NULL, colors = NULL){
+violinPlot <- function(data, x, y, order = NULL, colors = NULL){
   data %>%
     ggplot2::ggplot(ggplot2::aes_string(x, y, color = x)) +
-    ggplot2::geom_boxplot(show.legend = FALSE) +
+    ggplot2::geom_violin(show.legend = FALSE) +
     ggplot2::scale_x_discrete(limits = order) +
     ggplot2::scale_color_manual(values = colors) +
     ggplot2::labs(title = paste0("Distribution of ", y, " in Different ", x, " Categories")) +
@@ -13,11 +13,11 @@ boxPlot <- function(data, x, y, order = NULL, colors = NULL){
 }
 
 
-# BOX PLOTS FOR NUMERIC FEATURES SPLIT IN TARGET FEAT CATEGORIS ----
+# VIOLIN PLOTS FOR NUMERIC FEATURES SPLIT IN TARGET FEAT CATEGORIS ----
 
-#' A function to display or save box plots created on all numeric features.
+#' A function to display or save violin plots created on all numeric features.
 #'
-#' @description Creates (or saves as png if asked) boxplots for all numeric features. Split the box plots based on target feature categories.
+#' @description Creates (or saves as png if asked) violin plots for all numeric features. Split the violin plots based on target feature categories.
 #'
 #' @param dataset Name of the data frame object
 #' @param classVar Name of the target feature
@@ -43,7 +43,7 @@ boxPlot <- function(data, x, y, order = NULL, colors = NULL){
 #'
 #' @export
 
-biv_box_plot <- function(dataset, classVar, order = NULL, colors = NULL, facet = NULL, loc = NULL) {
+biv_violin_plot <- function(dataset, classVar, order = NULL, colors = NULL, facet = NULL, loc = NULL) {
 
   x <- rlang::enquo(classVar) %>% rlang::get_expr()
   nLevels <- dplyr::select(dataset, {{classVar}}) %>% unique() %>% nrow()
@@ -55,15 +55,15 @@ biv_box_plot <- function(dataset, classVar, order = NULL, colors = NULL, facet =
   if(is.null(loc)){
     for(i in names(dplyr::select(dataset, where(is.numeric)))) {
       print(dataset %>%
-              boxPlot(x = x, y = i, order = order, colors = colors) +
+              violinPlot(x = x, y = i, order = order, colors = colors) +
               wrap_by({{facet}})
-            )
+      )
     }
   } else{
     for(i in names(dplyr::select(dataset, where(is.numeric)))) {
       png(paste0(loc, "/boxplot_", i, ".PNG"), width = 627, height = 453)
       plot <- dataset %>%
-        boxPlot(x = x, y = i, order = order, colors = colors) +
+        violinPlot(x = x, y = i, order = order, colors = colors) +
         wrap_by({{facet}})
       print(plot)
       dev.off()
