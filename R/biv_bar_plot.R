@@ -83,8 +83,8 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
       {
         for(i in cols){
 
-          if (prod(mapply(nchar, levels(dataset[[i]])) <= 2) == 0) { # checks true if there is at least one level that has more than 2 character long name
-              print( dataset %>%
+          if (prod(mapply(nchar, levels(factor(dataset[[i]]))) <= 2) == 0) { # checks true if there is at least one level that has more than 2 character long name
+              print(dataset %>%
                   dplyr::select(x, {{facet}}, all_of(i)) %>%
                   table() %>%
                   data.frame() %>%
@@ -109,7 +109,7 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
       for(i in cols) {
 
         png(paste0(loc, "/barplot_", i, ".PNG"), width = 627, height = 453)
-        plot <- if (prod(mapply(nchar, levels(dataset[[i]])) <= 2)) { # checks true if there is at least one level that has more than 2 character long name
+        plot <- if (prod(mapply(nchar, levels(factor(dataset[[i]]))) <= 2)) { # checks true if there is at least one level that has more than 2 character long name
           print( dataset %>%
                    dplyr::select(x, {{facet}}, all_of(i)) %>%
                    table() %>%
