@@ -4,7 +4,7 @@
 #' @noRd
 densePlot <- function(data, numVar, catVar, colors = NULL){
   data %>%
-    ggplot2::ggplot(ggplot2::aes_string(numVar, fill = catVar, color = catVar)) +
+    ggplot2::ggplot(ggplot2::aes_string(numVar, fill = catVar)) +
     ggplot2::geom_density(alpha = 0.3, na.rm = TRUE) +
     ggplot2::scale_fill_manual(values = colors) +
     ggplot2::labs(title = paste0("Distribution of ", numVar, " Based on ", catVar)) +
