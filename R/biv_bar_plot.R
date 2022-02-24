@@ -80,12 +80,16 @@ biv_bar_plot <- function(dataset, classVar, order = NULL,
     # print("plotting...")
     if(is.null(loc)){
       for(i in cols) {
-        print(dataset %>%
+        df <- dataset %>%
                 dplyr::select(x, {{facet}}, all_of(i)) %>%
                 table() %>%
-                data.frame() %>%
+                data.frame()
+
+
+        print(df %>%
                 barPlot(x = i, y = "Freq", fill = x, position = barType, colors = colors) +
-                wrap_by({{facet}})
+                wrap_by({{facet}}) +
+                ggplot2::coord_flip()
         )
       }
     } else{
