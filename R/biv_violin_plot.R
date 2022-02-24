@@ -6,7 +6,7 @@ violinPlot <- function(data, x, y, order = NULL, colors = NULL){
   data %>%
     ggplot2::ggplot(ggplot2::aes_string(x, y, fill = x)) +
     ggplot2::geom_violin(show.legend = FALSE) +
-    ggplot2::geom_boxplot(width = 0.1, color = 'white') +
+    ggplot2::geom_boxplot(width = 0.1) +
     ggplot2::scale_x_discrete(limits = order) +
     ggplot2::scale_fill_manual(values = colors) +
     ggplot2::labs(title = paste0("Distribution of ", y, " in Different ", x, " Categories")) +
