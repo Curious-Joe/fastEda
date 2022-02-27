@@ -16,6 +16,8 @@ multiple plots on similar data to perform common tasks such as:
   - Plot individual feature/variable,
   - Visualize plots to explore bi-variate relations between target
     feature and input features.
+    
+<img src="https://curious-joe.net/img/fastEda_demo.gif" width="60%" height="60%" />
 
 ## Installation
 
@@ -44,5 +46,3 @@ biv_bar_plot(dataset = iris %>%
              colors = c("#5a4fcf", "#9890f0", "#d3d0f5"),
              barType = "fill")
 ```
-
-<img src="man/figures/README-example-1.png" width="60%" height="60%" />
